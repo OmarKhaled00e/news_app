@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
+
 import 'package:news_app/core/utils/api_service.dart';
 import 'package:news_app/features/home/data/models/article_model.dart';
 
@@ -20,3 +21,4 @@ class NewsCubit extends Cubit<NewsState> {
     }
   }
 }
+
