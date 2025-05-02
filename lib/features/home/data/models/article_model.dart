@@ -11,9 +11,9 @@ class ArticleModel {
 
   factory ArticleModel.fromJson(json) {
     return ArticleModel(
-      image: json['urlToImage'],
-      title: json['title'],
-      description: json['description'],
+      image: json['urlToImage'] ?? '',
+      title: json['title'] ?? 'No Title',
+      description: json['description'] ?? 'No Description',
     );
   }
 }

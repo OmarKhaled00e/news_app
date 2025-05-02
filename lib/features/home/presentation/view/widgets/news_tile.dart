@@ -1,8 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/core/utils/widgets/custom_loading_indicator.dart';
+import 'package:news_app/features/home/data/models/article_model.dart';
 
 class NewsTile extends StatelessWidget {
-  const NewsTile({super.key});
-
+  const NewsTile({super.key, required this.article});
+  final ArticleModel article;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -12,16 +15,21 @@ class NewsTile extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(6),
-            child: Image.asset(
-              'assets/sports.jpg',
+            child: CachedNetworkImage(
+              imageUrl: article.image,
               height: 200,
               width: double.infinity,
               fit: BoxFit.cover,
+              placeholder:
+                  (context, url) => CustomLoadingIndicator(), // أو شريط تحميل
+              errorWidget:
+                  (context, url, error) =>
+                      Image.asset('assets/sports.jpg', fit: BoxFit.cover),
             ),
           ),
           SizedBox(height: 12),
           Text(
-            'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusomd tempot incididunt ut labor ',
+            article.title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
@@ -32,7 +40,7 @@ class NewsTile extends StatelessWidget {
           ),
           SizedBox(height: 8),
           Text(
-            'and here is the subtitle of the news tile and here is the subtitle of the neame tilr ',
+            article.description ?? '',
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
             style: TextStyle(color: Colors.grey, fontSize: 14),
